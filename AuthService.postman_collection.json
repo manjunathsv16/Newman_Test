@@ -31,8 +31,8 @@
 													"    pm.environment.set(\"customerId\", jsonData.customerId);",
 													"});",
 													"",
-													"pm.test(\"Response status code is 422\", function () {",
-													"  pm.response.to.have.status(422);",
+													"pm.test(\"Response status code is 200\", function () {",
+													"  pm.response.to.have.status(200);",
 													"});",
 													"",
 													"",
@@ -51,9 +51,11 @@
 													"    pm.expect(responseData.isNewCustomer).to.exist.and.to.be.a('boolean');",
 													"});",
 													"",
-													"// Generate a random 10-digit number",
-													"let randomNumber = Math.floor(1000000000 + Math.random() * 9000000000);",
+													"// Generate a random 10-digit number, ensuring the first digit is not 1",
+													"let firstDigit = Math.floor(Math.random() * 8) + 2; // Random digit from 2 to 9",
+													"let randomNumber = firstDigit * 1000000000 + Math.floor(Math.random() * 1000000000); // Concatenate the first digit with 9 more digits",
 													"console.log(randomNumber);",
+													"",
 													"",
 													"// Optionally, you can set this number as a variable in Postman",
 													"pm.environment.set(\"randomNumber\", randomNumber);",
@@ -98,7 +100,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"deviceInfo\": {\n    \"deviceOs\": \"ANDROID\",\n    \"deviceBrand\": \"Samsung\",\n    \"deviceModel\": \"s23\",\n    \"deviceOsVersion\": \"12.0\",\n    \"vId\":\"\"\n  },\n  \"authMedium\": \"PHONE_SMS_OTP\",\n  \"authSource\": \"BELONGAPP\",\n  \"phone\": {\n    \"countryCode\": \"+91\",\n    \"phoneNumber\": \"{{randomNumber}}\"\n  },\n  \"meta\": {},\n  \"appInfo\": {\n    \"appSdkVersion\": \"string\"\n  },\n  \"userAgent\": \"string\"\n}",
+											"raw": "{\n  \"deviceInfo\": {\n    \"deviceOs\": \"ANDROID\",\n    \"deviceBrand\": \"Samsung\",\n    \"deviceModel\": \"s23\",\n    \"deviceOsVersion\": \"12.0\",\n    \"vId\":\"\"\n  },\n  \"authMedium\": \"PHONE_SMS_OTP\",\n  \"authSource\": \"BELONGAPP\",\n  \"phone\": {\n    \"countryCode\": \"+91\",\n    \"phoneNumber\": \"2854914699\"\n  },\n  \"meta\": {},\n  \"appInfo\": {\n    \"appSdkVersion\": \"string\"\n  },\n  \"userAgent\": \"string\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"

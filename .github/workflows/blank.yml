@@ -1,0 +1,42 @@
+name: Run Postman Collection
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-postman-collection:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    # Step 3: Install Newman globally
+    - name: Install Newman
+      run: npm install -g newman
+
+    # Step 4: Run Newman with the collection and environment
+    - name: Run Postman Collection
+      run: |
+        newman run AuthService.postman_collection.json \
+          -e Test.postman_environment.json
+
+    # Step 5: Upload the report as an artifact
+    - name: Upload Newman Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: newman-report
+        path: newman-report.html
+# This is a basic workflow to help you get started with Actions

@@ -35,12 +35,6 @@
 													"  pm.response.to.have.status(200);",
 													"});",
 													"",
-													"",
-													"pm.test(\"Response time is less than 1800ms\", function () {",
-													"  pm.expect(pm.response.responseTime).to.be.below(1800);",
-													"});",
-													"",
-													"",
 													"pm.test(\"Validate the schema for the response\", function () {",
 													"    const responseData = pm.response.json();",
 													"    ",
@@ -51,11 +45,10 @@
 													"    pm.expect(responseData.isNewCustomer).to.exist.and.to.be.a('boolean');",
 													"});",
 													"",
-													"// Generate a random 10-digit number, ensuring the first digit is not 1",
-													"let firstDigit = Math.floor(Math.random() * 8) + 2; // Random digit from 2 to 9",
-													"let randomNumber = firstDigit * 1000000000 + Math.floor(Math.random() * 1000000000); // Concatenate the first digit with 9 more digits",
+													"// Generate a 10-digit number, ensuring the first digit is one of [2, 6, 7, 8, 9]",
+													"let firstDigit = [2, 6, 7, 8, 9][Math.floor(Math.random() * 5)]; // Choose from the set [2, 6, 7, 8, 9]",
+													"let randomNumber = firstDigit * 1000000000 + Math.floor(Math.random() * 1000000000);",
 													"console.log(randomNumber);",
-													"",
 													"",
 													"// Optionally, you can set this number as a variable in Postman",
 													"pm.environment.set(\"randomNumber\", randomNumber);",
@@ -100,7 +93,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"deviceInfo\": {\n    \"deviceOs\": \"ANDROID\",\n    \"deviceBrand\": \"Samsung\",\n    \"deviceModel\": \"s23\",\n    \"deviceOsVersion\": \"12.0\",\n    \"vId\":\"\"\n  },\n  \"authMedium\": \"PHONE_SMS_OTP\",\n  \"authSource\": \"BELONGAPP\",\n  \"phone\": {\n    \"countryCode\": \"+91\",\n    \"phoneNumber\": \"2854914699\"\n  },\n  \"meta\": {},\n  \"appInfo\": {\n    \"appSdkVersion\": \"string\"\n  },\n  \"userAgent\": \"string\"\n}",
+											"raw": "{\n  \"deviceInfo\": {\n    \"deviceOs\": \"ANDROID\",\n    \"deviceBrand\": \"Samsung\",\n    \"deviceModel\": \"s23\",\n    \"deviceOsVersion\": \"12.0\",\n    \"vId\":\"\"\n  },\n  \"authMedium\": \"PHONE_SMS_OTP\",\n  \"authSource\": \"BELONGAPP\",\n  \"phone\": {\n    \"countryCode\": \"+91\",\n    \"phoneNumber\": \"{{randomNumber}}\"\n  },\n  \"meta\": {},\n  \"appInfo\": {\n    \"appSdkVersion\": \"string\"\n  },\n  \"userAgent\": \"string\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"

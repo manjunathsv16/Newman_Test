@@ -58,7 +58,7 @@
 											"script": {
 												"exec": [
 													"// Generate a 10-digit number, ensuring the first digit is one of [2, 6, 7, 8, 9]",
-													"let firstDigit = [2, 6, 7, 8, 9][Math.floor(Math.random() * 5)]; // Choose from the set [2, 6, 7, 8, 9]",
+													"let firstDigit = [6, 7, 8, 9][Math.floor(Math.random() * 5)]; // Choose from the set [2, 6, 7, 8, 9]",
 													"let randomNumber = firstDigit * 1000000000 + Math.floor(Math.random() * 1000000000);",
 													"",
 													"// Convert the number to a string",
@@ -109,7 +109,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"deviceInfo\": {\n    \"deviceOs\": \"ANDROID\",\n    \"deviceBrand\": \"Samsung\",\n    \"deviceModel\": \"s23\",\n    \"deviceOsVersion\": \"12.0\",\n    \"vId\":\"\"\n  },\n  \"authMedium\": \"PHONE_SMS_OTP\",\n  \"authSource\": \"BELONGAPP\",\n  \"phone\": {\n    \"countryCode\": \"+91\",\n    \"phoneNumber\": \"{{randomNumber}}\"\n  },\n  \"meta\": {},\n  \"appInfo\": {\n    \"appSdkVersion\": \"string\"\n  },\n  \"userAgent\": \"string\"\n}",
+											"raw": "{\n  \"deviceInfo\": {\n    \"deviceOs\": \"ANDROID\",\n    \"deviceBrand\": \"Samsung\",\n    \"deviceModel\": \"s23\",\n    \"deviceOsVersion\": \"12.0\",\n    \"vId\":\"\"\n  },\n  \"authMedium\": \"PHONE_SMS_OTP\",\n  \"authSource\": \"BELONGAPP\",\n  \"phone\": {\n    \"countryCode\": \"+91\",\n    \"phoneNumber\": \"2592045700\"\n  },\n  \"meta\": {},\n  \"appInfo\": {\n    \"appSdkVersion\": \"string\"\n  },\n  \"userAgent\": \"string\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"

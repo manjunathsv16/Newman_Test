@@ -208,14 +208,6 @@
 									]
 								},
 								{
-									"name": "https://www.nseix.com/api/getquotes?symbol=NIFTY&instrumenttype=Ind&expiry=30-Jan-2025&optiontype=-&strikeprice=-&inst=Index%20Futures",
-									"request": {
-										"method": "GET",
-										"header": []
-									},
-									"response": []
-								},
-								{
 									"name": "Validate authentication process",
 									"event": [
 										{

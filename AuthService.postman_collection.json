@@ -29,7 +29,36 @@
 													"pm.test(\"Set the value of customerId to environment variable\", function () {",
 													"    var jsonData = pm.response.json();",
 													"    pm.environment.set(\"customerId\", jsonData.customerId);",
-													"});"
+													"});",
+													"",
+													"pm.test(\"Response status code is 422\", function () {",
+													"  pm.response.to.have.status(422);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response time is less than 1800ms\", function () {",
+													"  pm.expect(pm.response.responseTime).to.be.below(1800);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Validate the schema for the response\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData.authTransactionId).to.exist.and.to.be.a('string');",
+													"    pm.expect(responseData.customerDeviceId).to.exist.and.to.be.a('string');",
+													"    pm.expect(responseData.customerId).to.exist.and.to.be.a('string');",
+													"    pm.expect(responseData.isNewCustomer).to.exist.and.to.be.a('boolean');",
+													"});",
+													"",
+													"// Generate a random 10-digit number",
+													"let randomNumber = Math.floor(1000000000 + Math.random() * 9000000000);",
+													"console.log(randomNumber);",
+													"",
+													"// Optionally, you can set this number as a variable in Postman",
+													"pm.environment.set(\"randomNumber\", randomNumber);",
+													"",
+													""
 												],
 												"type": "text/javascript",
 												"packages": {}
@@ -69,7 +98,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"deviceInfo\": {\n    \"deviceOs\": \"ANDROID\",\n    \"deviceBrand\": \"Samsung\",\n    \"deviceModel\": \"s23\",\n    \"deviceOsVersion\": \"12.0\",\n    \"vId\":\"\"\n  },\n  \"authMedium\": \"PHONE_SMS_OTP\",\n  \"authSource\": \"BELONGAPP\",\n  \"phone\": {\n    \"countryCode\": \"+91\",\n    \"phoneNumber\": \"2232455483\"\n  },\n  \"meta\": {},\n  \"appInfo\": {\n    \"appSdkVersion\": \"string\"\n  },\n  \"userAgent\": \"string\"\n}",
+											"raw": "{\n  \"deviceInfo\": {\n    \"deviceOs\": \"ANDROID\",\n    \"deviceBrand\": \"Samsung\",\n    \"deviceModel\": \"s23\",\n    \"deviceOsVersion\": \"12.0\",\n    \"vId\":\"\"\n  },\n  \"authMedium\": \"PHONE_SMS_OTP\",\n  \"authSource\": \"BELONGAPP\",\n  \"phone\": {\n    \"countryCode\": \"+91\",\n    \"phoneNumber\": \"{{randomNumber}}\"\n  },\n  \"meta\": {},\n  \"appInfo\": {\n    \"appSdkVersion\": \"string\"\n  },\n  \"userAgent\": \"string\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -185,6 +214,55 @@
 								},
 								{
 									"name": "Validate authentication process",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Response status code is 200\", function () {",
+													"  pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response time is less than 1800ms\", function () {",
+													"  pm.expect(pm.response.responseTime).to.be.below(1800);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response has the required fields\", function () {",
+													"  const responseData = pm.response.json();",
+													"  ",
+													"  pm.expect(responseData).to.be.an('object');",
+													"  pm.expect(responseData.customerId).to.exist;",
+													"  pm.expect(responseData.accessToken).to.exist;",
+													"  pm.expect(responseData.refreshToken).to.exist;",
+													"  pm.expect(responseData.isNewCustomerCreated).to.exist;",
+													"});",
+													"",
+													"",
+													"pm.test(\"CustomerId, accessToken, and refreshToken are non-empty strings\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData.customerId).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+													"    pm.expect(responseData.accessToken).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+													"    pm.expect(responseData.refreshToken).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"Verify that isNewCustomerCreated field is a boolean value\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData.isNewCustomerCreated).to.be.a('boolean');",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
 									"request": {
 										"method": "POST",
 										"header": [
@@ -342,6 +420,32 @@
 													"    var responseJson = pm.response.json();",
 													"    pm.environment.set(\"authMediumKey\", responseJson.authMediumKey);",
 													"});",
+													"",
+													"pm.test(\"Response status code is 200\", function () {",
+													"  pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response time is less than 1800ms\", function () {",
+													"  pm.expect(pm.response.responseTime).to.be.below(1800);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response has the required fields - authMediumKey and expiresAt\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData.authMediumKey).to.exist;",
+													"    pm.expect(responseData.expiresAt).to.exist;",
+													"});",
+													"",
+													"",
+													"pm.test(\"AuthMediumKey is not an empty string\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData.authMediumKey).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+													"});",
+													"",
 													""
 												],
 												"type": "text/javascript",
@@ -489,6 +593,57 @@
 								},
 								{
 									"name": "Initiate and validate authentication process",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Response status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response time is less than 1800ms\", function () {",
+													"  pm.expect(pm.response.responseTime).to.be.below(1800);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response has the required fields\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData.accessToken).to.exist;",
+													"    pm.expect(responseData.refreshToken).to.exist;",
+													"    pm.expect(responseData.customerId).to.exist;",
+													"    pm.expect(responseData.customerDeviceId).to.exist;",
+													"    pm.expect(responseData.isNewCustomer).to.exist;",
+													"});",
+													"",
+													"",
+													"pm.test(\"AccessToken, refreshToken, customerId, and customerDeviceId are non-empty strings\", function () {",
+													"  const responseData = pm.response.json();",
+													"  ",
+													"  pm.expect(responseData).to.be.an('object');",
+													"  pm.expect(responseData.accessToken).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+													"  pm.expect(responseData.refreshToken).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+													"  pm.expect(responseData.customerId).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+													"  pm.expect(responseData.customerDeviceId).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"IsNewCustomer is a boolean value\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData.isNewCustomer).to.be.a('boolean');",
+													"});",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
 									"request": {
 										"method": "POST",
 										"header": [
@@ -640,6 +795,55 @@
 						},
 						{
 							"name": "Fetch Auth Customer_details",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response has the required fields\", function () {",
+											"    const responseData = pm.response.json();",
+											"    ",
+											"    pm.expect(responseData).to.be.an('object');",
+											"    pm.expect(responseData.customerId).to.exist;",
+											"    pm.expect(responseData.state).to.exist;",
+											"    pm.expect(responseData.clientId).to.exist;",
+											"    pm.expect(responseData.phone).to.exist;",
+											"    pm.expect(responseData.phoneAnchor).to.exist;",
+											"    pm.expect(responseData.customerIp).to.exist;",
+											"});",
+											"",
+											"",
+											"pm.test(\"Phone country code is in a valid format\", function () {",
+											"  const responseData = pm.response.json();",
+											"  ",
+											"  pm.expect(responseData).to.be.an('object');",
+											"  pm.expect(responseData.phone).to.exist.and.to.be.an('object');",
+											"  pm.expect(responseData.phone.countryCode).to.match(/^\\+\\d+$/);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Phone number is in a valid format\", function () {",
+											"  const responseData = pm.response.json();",
+											"  ",
+											"  pm.expect(responseData.phone.phoneNumber).to.match(/^\\d{10}$/);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response time is less than 1800ms\", function () {",
+											"  pm.expect(pm.response.responseTime).to.be.below(1800);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [
@@ -684,6 +888,27 @@
 						},
 						{
 							"name": "Register authentication medium",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response status code is 204\", function () {",
+											"    pm.response.to.have.status(204);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response time is less than 1800ms\", function () {",
+											"  pm.expect(pm.response.responseTime).to.be.below(1800);",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [

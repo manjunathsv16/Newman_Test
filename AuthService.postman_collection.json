@@ -109,7 +109,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"deviceInfo\": {\n    \"deviceOs\": \"ANDROID\",\n    \"deviceBrand\": \"Samsung\",\n    \"deviceModel\": \"s23\",\n    \"deviceOsVersion\": \"12.0\",\n    \"vId\":\"\"\n  },\n  \"authMedium\": \"PHONE_SMS_OTP\",\n  \"authSource\": \"BELONGAPP\",\n  \"phone\": {\n    \"countryCode\": \"+91\",\n    \"phoneNumber\": \"2592045700\"\n  },\n  \"meta\": {},\n  \"appInfo\": {\n    \"appSdkVersion\": \"string\"\n  },\n  \"userAgent\": \"string\"\n}",
+											"raw": "{\n  \"deviceInfo\": {\n    \"deviceOs\": \"ANDROID\",\n    \"deviceBrand\": \"Samsung\",\n    \"deviceModel\": \"s23\",\n    \"deviceOsVersion\": \"12.0\",\n    \"vId\":\"\"\n  },\n  \"authMedium\": \"PHONE_SMS_OTP\",\n  \"authSource\": \"BELONGAPP\",\n  \"phone\": {\n    \"countryCode\": \"+91\",\n    \"phoneNumber\": \"{{randomNumber}}\"\n  },\n  \"meta\": {},\n  \"appInfo\": {\n    \"appSdkVersion\": \"string\"\n  },\n  \"userAgent\": \"string\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -279,7 +279,7 @@
 										"header": [
 											{
 												"key": "x-client-id",
-												"value": "7248a069-71f5-4e36-a1a3-95db6be24656",
+												"value": "85222851-6d55-46ed-9ab1-568fd1dea977",
 												"type": "text"
 											},
 											{
@@ -660,7 +660,7 @@
 										"header": [
 											{
 												"key": "x-client-id",
-												"value": "7248a069-71f5-4e36-a1a3-95db6be24656",
+												"value": "85222851-6d55-46ed-9ab1-568fd1dea977",
 												"type": "text"
 											},
 											{

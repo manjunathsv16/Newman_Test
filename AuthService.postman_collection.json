@@ -31,16 +31,6 @@
 													"    pm.environment.set(\"customerId\", jsonData.customerId);",
 													"});",
 													"",
-													"// Generate a 10-digit number, ensuring the first digit is one of [2, 6, 7, 8, 9]",
-													"let firstDigit = [2, 6, 7, 8, 9][Math.floor(Math.random() * 5)]; // Choose from the set [2, 6, 7, 8, 9]",
-													"let randomNumber = firstDigit * 1000000000 + Math.floor(Math.random() * 1000000000);",
-													"",
-													"// Set the generated random number to an environment variable",
-													"pm.environment.set(\"randomNumber\", randomNumber);",
-													"",
-													"// Log the random number to the console",
-													"console.log(randomNumber);",
-													"",
 													"pm.test(\"Response status code is 200\", function () {",
 													"  pm.response.to.have.status(200);",
 													"});",
@@ -57,6 +47,28 @@
 													"",
 													"",
 													"",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// Generate a 10-digit number, ensuring the first digit is one of [2, 6, 7, 8, 9]",
+													"let firstDigit = [2, 6, 7, 8, 9][Math.floor(Math.random() * 5)]; // Choose from the set [2, 6, 7, 8, 9]",
+													"let randomNumber = firstDigit * 1000000000 + Math.floor(Math.random() * 1000000000);",
+													"",
+													"// Convert the number to a string",
+													"let randomNumberString = randomNumber.toString();",
+													"",
+													"// Set the generated random number as a string to an environment variable",
+													"pm.environment.set(\"randomNumber\", randomNumberString);",
+													"",
+													"// Log the random number as a string to the console",
+													"console.log(randomNumberString);",
 													""
 												],
 												"type": "text/javascript",
